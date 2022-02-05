@@ -1,0 +1,2 @@
+Aplikacja dla firmy wynajmuj¹cej pojazdy. Mo¿na wprowadzaæ do niej wprowadzaæ pojazdy róznych typów
+np samochody osobowe lub ciêzarowe i ich parametry. 
