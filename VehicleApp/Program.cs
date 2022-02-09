@@ -4,7 +4,7 @@ using VehicleApp.Repositories;
 
 
 var carRepository = new SqlRepository<Car>(new VehicleAppDbContext());
-//var truckRepository = new SqlRepository<Truck>(new VehicleAppDbContext());
+var truckRepository = new SqlRepository<Truck>(new VehicleAppDbContext());
 
 carRepository.ItemAdded += CarRepositoryOnItemAdded;
 carRepository.ItemRemoved += CarRepositoryOnItemRemoved;
@@ -139,40 +139,40 @@ void AddCar()
 
 void AddTruck()
 {
-    Console.WriteLine("Narazie sie nie da dodawać ciężarówek");
-    //var newTruck = new Truck();
-    //Console.Clear();
+    //Console.WriteLine("Narazie sie nie da dodawać ciężarówek");
+    var newTruck = new Truck();
+    Console.Clear();
 
-    //Console.WriteLine("Podaj markę samochodu ciężarowego:");
-    //newTruck.Brand = Console.ReadLine();
+    Console.WriteLine("Podaj markę samochodu ciężarowego:");
+    newTruck.Brand = Console.ReadLine();
 
-    //Console.WriteLine("Podaj Model:");
-    //newTruck.Name = Console.ReadLine();
+    Console.WriteLine("Podaj Model:");
+    newTruck.Name = Console.ReadLine();
 
-    //Console.WriteLine("Podaj rok produkcji:");
-    //newTruck.YearOfManufacture = Console.ReadLine();
+    Console.WriteLine("Podaj rok produkcji:");
+    newTruck.YearOfManufacture = Console.ReadLine();
 
-    //Console.WriteLine("Podaj rodzaj paliwa (1-benzyna, 2-diesel)");
-    //var selectFuelType = Console.ReadLine();
-    //if (selectFuelType == "1")
-    //{
-    //    newTruck.FuelType = FuelType.Petrol;
-    //}
-    //else if (selectFuelType == "2")
-    //{
-    //    newTruck.FuelType = FuelType.Diesel;
-    //}
-    //else
-    //{
-    //    throw new ArgumentException("Błąd. Podano zły rodzaj paliwa.");
-    //}
+    Console.WriteLine("Podaj rodzaj paliwa (1-benzyna, 2-diesel)");
+    var selectFuelType = Console.ReadLine();
+    if (selectFuelType == "1")
+    {
+        newTruck.FuelType = FuelType.Petrol;
+    }
+    else if (selectFuelType == "2")
+    {
+        newTruck.FuelType = FuelType.Diesel;
+    }
+    else
+    {
+        throw new ArgumentException("Błąd. Podano zły rodzaj paliwa.");
+    }
 
-    //    truckRepository.Add(newTruck);
-    //    truckRepository.Save();
-    //    truckRepository.ItemAdded += CarRepositoryOnItemAdded;
+    truckRepository.Add(newTruck);
+    truckRepository.Save();
+    truckRepository.ItemAdded += CarRepositoryOnItemAdded;
 
 
-    //Console.WriteLine($"Dodano samochód ciężarowy: {newTruck.Brand} {newTruck.Name}");
+    Console.WriteLine($"Dodano samochód ciężarowy: {newTruck.Brand} {newTruck.Name}");
 }
 
 void RemoveVehicle()
@@ -188,7 +188,7 @@ void RemoveVehicle()
             break;
 
         case "2":
-            //ShowTrucks();
+            ShowTrucks();
             RemoveTruck();
             break;
 
@@ -228,32 +228,32 @@ void RemoveCar()
 void RemoveTruck()
 {
     Console.WriteLine("Narazie sie nie da usuwać ciężarówek");
-    //int selectId;
-    //bool selectSucces = false;
-    //while (selectSucces == false)
-    //{
-    //    Console.WriteLine("Wpisz numer Id pojazdu ktróry chcesz usunąć:");
-    //    int.TryParse(Console.ReadLine(), out selectId);
-    //    using (var dataBase = new VehicleAppDbContext())
-    //    {
-    //        var truckRepository = new SqlRepository<Truck>(dataBase);
-    //        var selectedVehicle = truckRepository.GetById(selectId);
-    //        if (selectedVehicle != null)
-    //        {
-    //            truckRepository.Remove(selectedVehicle);
-    //            truckRepository.Save();
-    //            truckRepository.ItemRemoved += CarRepositoryOnItemRemoved;
+    int selectId;
+    bool selectSucces = false;
+    while (selectSucces == false)
+    {
+        Console.WriteLine("Wpisz numer Id pojazdu ktróry chcesz usunąć:");
+        int.TryParse(Console.ReadLine(), out selectId);
+        using (var dataBase = new VehicleAppDbContext())
+        {
+            var truckRepository = new SqlRepository<Truck>(dataBase);
+            var selectedVehicle = truckRepository.GetById(selectId);
+            if (selectedVehicle != null)
+            {
+                truckRepository.Remove(selectedVehicle);
+                truckRepository.Save();
+                truckRepository.ItemRemoved += CarRepositoryOnItemRemoved;
 
-    //            selectSucces = true;
-    //            Console.Clear();
-    //            Console.WriteLine($"Usunięto pojazd {selectedVehicle.ToString()}");
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("Nie ma pojazdu o podanym Id");
-    //        }
-    //    }
-    //}
+                selectSucces = true;
+                Console.Clear();
+                Console.WriteLine($"Usunięto pojazd {selectedVehicle.ToString()}");
+            }
+            else
+            {
+                Console.WriteLine("Nie ma pojazdu o podanym Id");
+            }
+        }
+    }
 }
 
 void ShowListOfVehicles()
@@ -278,14 +278,14 @@ void ShowCars()
 }
 void ShowTrucks()
 {
-    //Console.WriteLine("Samochody ciężarowe:");
-    //Console.WriteLine($"ID {"Marka",11} {"Model",11}");
-    //Console.WriteLine("-------------------------");
+    Console.WriteLine("Samochody ciężarowe:");
+    Console.WriteLine($"ID {"Marka",11} {"Model",11}");
+    Console.WriteLine("-------------------------");
 
-    //    var truckList = truckRepository.GetAll();
-    //    foreach (var truck in truckList)
-    //    {
-    //        Console.WriteLine($"{truck.Id,-3}{truck.Brand,11}{truck.Name,11}");
-    //    }
+    var truckList = truckRepository.GetAll();
+    foreach (var truck in truckList)
+    {
+        Console.WriteLine($"{truck.Id,-3}{truck.Brand,11}{truck.Name,11}");
+    }
 
 }
